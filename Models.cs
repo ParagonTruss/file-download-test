@@ -5,7 +5,7 @@ namespace file_download_test;
 public class DownloadRequest
 {
     [JsonPropertyName("guidType")]
-    public int GuidType { get; set; } = 0;
+    public GuidType GuidType { get; set; } = 0;
 
     [JsonPropertyName("guidToQuantity")]
     public Dictionary<Guid, int> GuidToQuantity { get; set; } = new();
@@ -17,7 +17,8 @@ public class DownloadRequest
     public string? SharedComponentSetLookupCode { get; set; }
 
     [JsonPropertyName("memberType")]
-    public int? MemberType { get; set; }
+    // only used for machinery TRS downloads, ignored otherwise
+    public DownloadMachineryTrsRequestMemberTypes? MemberType { get; set; }
 }
 
 public class AssemblyGroupResponse
@@ -36,4 +37,17 @@ public class StationComponentDesign
 
     [JsonPropertyName("quantity")]
     public int Quantity { get; set; } = 1;
+}
+
+public enum GuidType
+{
+    ComponentDesign = 0
+}
+
+public enum DownloadMachineryTrsRequestMemberTypes
+{
+    All = 0,
+    Chords = 1,
+    Webs = 2,
+    Blocks = 3,
 }

@@ -1,10 +1,15 @@
 ﻿using file_download_test;
 
-// !!! USER CONFIGURATION !!!
 // api docs https://designserver.paragontruss.com/api-docs
-string AssemblyGroupGuid = "GUID_HERE";
+
+// !!! USER CONFIGURATION !!!
+// get this from on of the assembly groups at https://production.paragontruss.com/assembly-groups
+string AssemblyGroupGuid = "GUID_HERE"; 
+
+// api key can be created within https://design.paragontruss.com/
 string ApiToken = "TOKEN_HERE";
-string BaseUrl = "https://designserver.paragontruss.com/"; // Adjust if needed
+
+string BaseUrl = "https://designserver.paragontruss.com/";
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Console.WriteLine("--- File Download Example Script ---");
@@ -43,11 +48,11 @@ var guidToQuantity = assemblyGroup.ComponentDesigns.ToDictionary(
 
 var downloadRequest = new DownloadRequest
 {
-    GuidType = 0,
+    GuidType = GuidType.ComponentDesign,
     GuidToQuantity = guidToQuantity,
     GroupName = assemblyGroup.Name,
     SharedComponentSetLookupCode = null,
-    MemberType = 0
+    MemberType = DownloadMachineryTrsRequestMemberTypes.All
 };
 
 // 3. Download Files
